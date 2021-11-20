@@ -32,7 +32,29 @@ class MainActivity : AppCompatActivity() {
         val result = scanner.process(image)
             .addOnSuccessListener { barcodes ->
                 // Task completed successfully
-                // ...
+                for (barcode in barcodes) {
+                    val bounds = barcode.boundingBox
+                    val corners = barcode.cornerPoints
+
+                    val rawValue = barcode.rawValue
+
+                    // See API reference for complete list of supported types
+                    when (barcode.valueType) {
+                        Barcode.TYPE_WIFI -> {
+                            val ssid = barcode.wifi!!.ssid
+                            val password = barcode.wifi!!.password
+                            val type = barcode.wifi!!.encryptionType
+                        }
+                        Barcode.TYPE_URL -> {
+                            val title = barcode.url!!.title
+                            val url = barcode.url!!.url
+                        }
+                        Barcode.TYPE_TEXT -> {
+                            val mess = barcode.rawValue
+                        }
+                    }
+                }
+
             }
             .addOnFailureListener {
                 // Task failed with an exception
