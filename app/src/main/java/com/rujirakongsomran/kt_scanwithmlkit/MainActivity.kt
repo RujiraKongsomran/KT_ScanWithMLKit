@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Configure the barcode scanner
         val options = BarcodeScannerOptions.Builder()
             .setBarcodeFormats(
                 Barcode.FORMAT_QR_CODE
@@ -21,8 +22,21 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.qrcode)
+        // Using a Bitmap
         val image = InputImage.fromBitmap(bitmap, 0)
 
+        // Get an instance of BarcodeScanner
         val scanner = BarcodeScanning.getClient(options)
+
+        // Process the image
+        val result = scanner.process(image)
+            .addOnSuccessListener { barcodes ->
+                // Task completed successfully
+                // ...
+            }
+            .addOnFailureListener {
+                // Task failed with an exception
+                // ...
+            }
     }
 }
