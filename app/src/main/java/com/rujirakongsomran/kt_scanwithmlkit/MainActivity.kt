@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             )
             .build()
 
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.qrcode)
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.qrcode_url)
         // Using a Bitmap
         val image = InputImage.fromBitmap(bitmap, 0)
 
@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
 
                     val rawValue = barcode.rawValue
 
+                    val valueType = barcode.valueType
+
                     // See API reference for complete list of supported types
-                    when (barcode.valueType) {
+                    when (valueType) {
                         Barcode.TYPE_WIFI -> {
                             val ssid = barcode.wifi!!.ssid
                             val password = barcode.wifi!!.password
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                             val url = barcode.url!!.url
                         }
                         Barcode.TYPE_TEXT -> {
-                            val mess = barcode.rawValue
+
                         }
                     }
                 }
