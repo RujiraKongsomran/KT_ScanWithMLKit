@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KT_ScanWithMLKit</string>
+    <string name="take_photo">Take Photo</string>
 </resources>
